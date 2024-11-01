@@ -19,7 +19,7 @@ def takeCommand():
         print("Listening...")
         r.pause_threshold = 1  # Pause time
         r.energy_threshold = 300  # Sensitivity for background noise
-        audio = r.listen(source, timeout=10)  # Will wait for 4 seconds
+        audio = r.listen(source, timeout = 10)  # Will wait for 10 seconds
 
     try:
         print("Understanding...")
@@ -28,23 +28,24 @@ def takeCommand():
         return query
     except speech_recognition.UnknownValueError:
         print("Sorry, I did not understand that.")
+        speak("Sorry, I did not understand that.")
         return None
     except speech_recognition.RequestError as e:
         print(f"Could not request results; {e}")
+        speak(f"Sorry, I could not request results; {e}")
         return None
 
 
 def greet():
     hour = int(datetime.datetime.now().hour)
     if hour >= 0 and hour <= 12:
-        speak("Good Morning Yash")
+        speak("Good Morning Sir")
     elif hour > 12 and hour <= 18:
-        speak("Good Afternoon Yash")
+        speak("Good Afternoon Sir")
     else:
-        speak("Good Night Yash")
+        speak("Good Night Sir")
 
-    speak("Please tell me, How can I help you?")
-
+    speak("What can I do for you today?")
 
 if __name__ == "__main__":
     while True:
@@ -59,3 +60,5 @@ if __name__ == "__main__":
             if "go to sleep" in query:
                 speak("Going offline")
                 break
+            
+                
